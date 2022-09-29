@@ -20,10 +20,10 @@ const Navbar = () => {
             <Link href="/" passHref>
               <li className={styles.listItem}>Home</li>
             </Link>
-            <li className={styles.listItem}>Products</li>
+            <li className={styles.listItem}>Location</li>
             <li className={styles.listItem}>Menu</li>
             <Image src="/img/LOGO.png" alt="" width="160px" height="160px" />
-            <li className={styles.listItem}>Blog</li>
+            <li className={styles.listItem}>Event</li>
             <li className={styles.listItem}>About Us</li>
             <li className={styles.listItem}>Contact</li>
           </ul>
