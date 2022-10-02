@@ -4,14 +4,14 @@ import { useState } from "react";
 
 const Product = () => {
   const [size, setSize] = useState(0);
-  const burger = {
-    id: 1,
-    title: "Burger King",
-    img: "/img/burger.png",
-    name: "Burger King",
-    price: [14.9, 16.9, 18.9],
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis arcu purus, rhoncus fringilla vestibulum vel, dignissim vel ante. Nulla facilisi. Nullam a urna sit amet tellus pellentesque egestas in in ante.",
-  };
+  // const burger = {
+  //   id: 1,
+  //   title: "Burger King",
+  //   img: "/img/burger.png",
+  //   name: "Burger King",
+  //   price: [14.9, 16.9, 18.9],
+  //   desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis arcu purus, rhoncus fringilla vestibulum vel, dignissim vel ante. Nulla facilisi. Nullam a urna sit amet tellus pellentesque egestas in in ante.",
+  // };
   return (
     <div className={styles.container}>
       <div className={styles.left}>
