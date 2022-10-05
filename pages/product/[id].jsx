@@ -1,17 +1,39 @@
 import styles from "../../styles/Product.module.css";
 import Image from "next/image";
 import { useState } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../redux/cartSlice";
 
-const Product = () => {
+const Product = ({ burger }) => {
+  const [price, setPrice] = useState(burger.prices[0]);
   const [size, setSize] = useState(0);
-  // const burger = {
-  //   id: 1,
-  //   title: "Burger King",
-  //   img: "/img/burger.png",
-  //   name: "Burger King",
-  //   price: [14.9, 16.9, 18.9],
-  //   desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis arcu purus, rhoncus fringilla vestibulum vel, dignissim vel ante. Nulla facilisi. Nullam a urna sit amet tellus pellentesque egestas in in ante.",
-  // };
+  const [quantity, setQuantity] = useState(1);
+  const [extras, setExtras] = useState([]);
+  const dispatch = useDispatch();
+
+  const changePrice = (number) => {
+    setPrice(price + number);
+  };
+  const handleSize = (sizeIndex) => {
+    const difference = burger.prices[sizeIndex] - burger.prices[size];
+    setSize(sizeIndex);
+    changePrice(difference);
+  };
+
+  const handlechange = (e, option) => {
+    const checked = e.target.checked;
+    if (checked) {
+      changePrice(option.price);
+      setExtras((prev) => [...prev, option]);
+    } else {
+      changePrice(-option.price);
+      setExtras(extras.filter((extra) => extra._id !== option._id));
+    }
+  };
+  const handleClick = () => {
+    dispatch(addProduct({ ...burger, extras, price, quantity }));
+  };
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -21,7 +43,7 @@ const Product = () => {
       </div>
       <div className={styles.right}>
         <h1 className={styles.title}>{burger.title}</h1>
-        <span className={styles.price}>${burger.price[size]}</span>
+        <span className={styles.price}>${price}</span>
         <p className={styles.desc}>{burger.desc}</p>
         <h3 className={styles.choose}>Choose the size</h3>
         <div className={styles.sizes}>
@@ -40,30 +62,42 @@ const Product = () => {
         </div>
         <h3 className={styles.choose}>Meal options</h3>
         <div className={styles.ingredients}>
-          <div className={styles.option}>
-            <input type="checkbox" id="double" name="double" className={styles.checkbox} />
-            <label htmlFor="double">Double Ingredients</label>
-          </div>
-          <div className={styles.option}>
-            <input className={styles.checkbox} type="checkbox" id="cheese" name="cheese" />
-            <label htmlFor="cheese">Extra Cheese</label>
-          </div>
-          <div className={styles.option}>
-            <input className={styles.checkbox} type="checkbox" id="spicy" name="spicy" />
-            <label htmlFor="spicy">Spicy Sauce</label>
-          </div>
-          <div className={styles.option}>
-            <input className={styles.checkbox} type="checkbox" id="garlic" name="garlic" />
-            <label htmlFor="garlic">Garlic Sauce</label>
-          </div>
+          {burger.extraOptions.map((option) => (
+            <div className={styles.option} key={option._id}>
+              <input
+                type="checkbox"
+                id={option.text}
+                name={option.text}
+                className={styles.checkbox}
+                onChange={(e) => handlechange(e, option)}
+              />
+              <label htmlFor="double">{option.text}</label>
+            </div>
+          ))}
         </div>
         <div className={styles.add}>
-          <input type="number" defaultValue={1} className={styles.quantity} />
-          <button className={styles.button}>Add to Cart</button>
+          <input
+            type="number"
+            defaultValue={1}
+            className={styles.quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+          />
+          <button className={styles.button} onClick={handleClick}>
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>
   );
+};
+
+export const getServerSideProps = async ({ params }) => {
+  const res = await axios.get(`http://localhost:3000/api/products/${params.id}`);
+  return {
+    props: {
+      burger: res.data,
+    },
+  };
 };
 
 export default Product;
