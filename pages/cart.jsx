@@ -105,7 +105,7 @@ const Cart = () => {
             </tr>
           </tbody>
           <tbody className={styles.tbody}>
-            {cart.products.map((products) => (
+            {cart.products.map((product) => (
               <tr className={styles.tr} key={product._id}>
                 <td>
                   <div className={styles.imgContainer}>
@@ -150,6 +150,9 @@ const Cart = () => {
           </div>
           {open ? (
             <div className={styles.paymentMethods}>
+              {/* <button className={styles.payButton} onClick={() => setCash(true)}>
+                CASH ON DELIVERY
+              </button> */}
               <PayPalScriptProvider
                 options={{
                   "client-id":
@@ -164,7 +167,7 @@ const Cart = () => {
             </div>
           ) : (
             <button onClick={() => setOpen(true)} className={styles.button}>
-              CHECKOUT
+              CHECKOUT NOW!
             </button>
           )}
         </div>

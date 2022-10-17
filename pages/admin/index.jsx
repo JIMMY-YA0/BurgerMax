@@ -5,6 +5,8 @@ import styles from "../../styles/Admin.module.css";
 
 const Index = ({ orders, products }) => {
   const [burgerList, setBurgerList] = useState(products);
+  const [orderList, setOrderList] = useState(orders);
+  const status = ["preparing", "on the way", "delivered"];
 
   return (
     <div className={styles.container}>
@@ -40,15 +42,46 @@ const Index = ({ orders, products }) => {
           ))}
         </table>
       </div>
+      <div className={styles.item}>
+        <h1 className={styles.title}>Orders</h1>
+        <table className={styles.table}>
+          <tbody>
+            <tr className={styles.trTitle}>
+              <th>Id</th>
+              <th>Customer</th>
+              <th>Total</th>
+              <th>Payment</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </tbody>
+          {orderList.map((order) => (
+            <tbody key={order._id}>
+              <tr className={styles.trTitle}>
+                <td>{order._id}</td>
+                <td>{order.customer}</td>
+                <td>${order.total}</td>
+                <td>{order.method === 0 ? <span>cash</span> : <span>paid</span>}</td>
+                <td>{status[order.status]}</td>
+                <td>
+                  <button onClick={() => handleStatus(order._id)}>Next Stage</button>
+                </td>
+              </tr>
+            </tbody>
+          ))}
+        </table>
+      </div>
     </div>
   );
 };
 
 export const getServerSideProps = async (ctx) => {
   const productRes = await axios.get("http://localhost:3000/api/products");
+  const orderRes = await axios.get("http://localhost:3000/api/orders");
 
   return {
     props: {
+      orders: orderRes.data,
       products: productRes.data,
     },
   };
