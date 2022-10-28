@@ -14,7 +14,6 @@ export default function Home({ burgerList, admin }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Featured />
-
       <BurgerList burgerList={burgerList} />
     </div>
   );

@@ -1,12 +1,14 @@
 import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
+import Add from "../../components/Add";
+import AddButton from "../../components/AddButton";
 import styles from "../../styles/Admin.module.css";
 
 const Index = ({ orders, products }) => {
   const [burgerList, setBurgerList] = useState(products);
   const [orderList, setOrderList] = useState(orders);
-  const status = ["preparing", "on the way", "delivered"];
+  const status = ["Preparing", "On the way", "Delivered"];
 
   const handleDelete = async (id) => {
     console.log(id);
@@ -20,41 +22,55 @@ const Index = ({ orders, products }) => {
 
   const handleStatus = async (id) => {
     const item = orderList.filter((order) => order._id === id)[0];
+    console.log(item);
     const currentStatus = item.status;
 
     try {
-      const res = await axios.put("http://localhost:3000/api/orders/" + id, {
-        status: currentStatus + 1,
-      });
-      setOrderList([res.data, ...orderList.filter((order) => order._id !== id)]);
+      if (currentStatus < 2) {
+        const res = await axios.put("http://localhost:3000/api/orders/" + id, {
+          status: currentStatus + 1,
+        });
+        setOrderList([res.data, ...orderList.filter((order) => order._id !== id)]);
+      } else {
+        const res = await axios.put("http://localhost:3000/api/orders/" + id, {
+          status: 0,
+        });
+        setOrderList([res.data, ...orderList.filter((order) => order._id !== id)]);
+      }
     } catch (err) {
       console.log(err);
     }
   };
-
+  const [close, setClose] = useState(true);
   return (
     <div className={styles.container}>
       <div className={styles.item}>
-        <h1 className={styles.title}>Products</h1>
+        <div className={styles.productList}>
+          <h1>Products List</h1>
+          {<AddButton setClose={setClose} />}
+          {!close && <Add setClose={setClose} />}
+        </div>
         <table className={styles.table}>
           <tbody>
-            <tr className={styles.trTitle}>
+            <tr>
               <th>Image</th>
-              <th>Id</th>
+              <th>Product ID</th>
               <th>Title</th>
-              <th>Price</th>
+              <th>Price(s-m-l)</th>
               <th>Action</th>
             </tr>
           </tbody>
           {burgerList.map((product) => (
             <tbody key={product._id}>
-              <tr className={styles.trTitle}>
+              <tr>
                 <td>
                   <Image src={product.img} width={50} height={50} objectFit="cover" alt="" />
                 </td>
                 <td>{product._id}</td>
                 <td>{product.title}</td>
-                <td>${product.prices[0]}</td>
+                <td>
+                  ${product.prices[0]}-${product.prices[1]}-${product.prices[2]}
+                </td>
                 <td>
                   <button className={styles.button}>Edit</button>
                   <button className={styles.button} onClick={() => handleDelete(product._id)}>
@@ -66,12 +82,14 @@ const Index = ({ orders, products }) => {
           ))}
         </table>
       </div>
+
+      {/* orderList */}
       <div className={styles.item}>
-        <h1 className={styles.title}>Orders</h1>
+        <h1>Orders List</h1>
         <table className={styles.table}>
           <tbody>
-            <tr className={styles.trTitle}>
-              <th>Id</th>
+            <tr>
+              <th>Order ID</th>
               <th>Customer</th>
               <th>Total</th>
               <th>Payment</th>
@@ -81,11 +99,11 @@ const Index = ({ orders, products }) => {
           </tbody>
           {orderList.map((order) => (
             <tbody key={order._id}>
-              <tr className={styles.trTitle}>
+              <tr>
                 <td>{order._id}</td>
                 <td>{order.customer}</td>
                 <td>${order.total}</td>
-                <td>{order.method === 0 ? <span>cash</span> : <span>paid</span>}</td>
+                <td>{order.method === 1 ? <span>paid</span> : <span>unpaid</span>}</td>
                 <td>{status[order.status]}</td>
                 <td>
                   <button onClick={() => handleStatus(order._id)}>Next Stage</button>
