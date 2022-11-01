@@ -8,7 +8,7 @@ const BurgerCard = ({ burger }) => {
         <Image src={burger.img} alt="" width="500" height="500" />
       </Link>
       <h1 className={styles.title}>{burger.title}</h1>
-      <span className={styles.price}>{burger.prices[0]}</span>
+      <span className={styles.price}>${burger.prices[0]}</span>
       <p className={styles.desc}>{burger.desc}</p>
     </div>
   );

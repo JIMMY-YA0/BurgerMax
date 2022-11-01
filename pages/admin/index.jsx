@@ -9,9 +9,7 @@ const Index = ({ orders, products }) => {
   const [burgerList, setBurgerList] = useState(products);
   const [orderList, setOrderList] = useState(orders);
   const status = ["Preparing", "On the way", "Delivered"];
-
   const handleDelete = async (id) => {
-    console.log(id);
     try {
       const res = await axios.delete("http://localhost:3000/api/products/" + id);
       setBurgerList(burgerList.filter((burger) => burger._id !== id));
@@ -44,6 +42,7 @@ const Index = ({ orders, products }) => {
   const [close, setClose] = useState(true);
   return (
     <div className={styles.container}>
+      {/* Products List */}
       <div className={styles.item}>
         <div className={styles.productList}>
           <h1>Products List</h1>
@@ -60,26 +59,28 @@ const Index = ({ orders, products }) => {
               <th>Action</th>
             </tr>
           </tbody>
-          {burgerList.map((product) => (
-            <tbody key={product._id}>
-              <tr>
-                <td>
-                  <Image src={product.img} width={50} height={50} objectFit="cover" alt="" />
-                </td>
-                <td>{product._id}</td>
-                <td>{product.title}</td>
-                <td>
-                  ${product.prices[0]}-${product.prices[1]}-${product.prices[2]}
-                </td>
-                <td>
-                  <button className={styles.button}>Edit</button>
-                  <button className={styles.button} onClick={() => handleDelete(product._id)}>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          ))}
+          {burgerList
+            .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+            .map((product) => (
+              <tbody key={product._id}>
+                <tr>
+                  <td>
+                    <Image src={product.img} width={50} height={50} objectFit="cover" alt="" />
+                  </td>
+                  <td>{product._id}</td>
+                  <td>{product.title}</td>
+                  <td>
+                    ${product.prices[0]}-${product.prices[1]}-${product.prices[2]}
+                  </td>
+                  <td>
+                    <button className={styles.button}>Edit</button>
+                    <button className={styles.button} onClick={() => handleDelete(product._id)}>
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            ))}
         </table>
       </div>
 
@@ -91,26 +92,37 @@ const Index = ({ orders, products }) => {
             <tr>
               <th>Order ID</th>
               <th>Customer</th>
-              <th>Total</th>
-              <th>Payment</th>
+              <th>Order Details</th>
+              <th>Paid</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
           </tbody>
-          {orderList.map((order) => (
-            <tbody key={order._id}>
-              <tr>
-                <td>{order._id}</td>
-                <td>{order.customer}</td>
-                <td>${order.total}</td>
-                <td>{order.method === 1 ? <span>paid</span> : <span>unpaid</span>}</td>
-                <td>{status[order.status]}</td>
-                <td>
-                  <button onClick={() => handleStatus(order._id)}>Next Stage</button>
-                </td>
-              </tr>
-            </tbody>
-          ))}
+          {orderList
+            .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+            .map((order) => (
+              <tbody key={order._id}>
+                <tr>
+                  <td>{order._id}</td>
+                  <td>{order.customer}</td>
+                  <td>
+                    {order.orderDetails.map((item) => (
+                      <span key={item._id}>
+                        {item.quantity} X {item.title}(
+                        {item.size === 0 ? "S" : item.size === 1 ? "M" : "L"}) Options:{" "}
+                        {item.extraOptions.map((item) => item.text + " ")}
+                        <br />
+                      </span>
+                    ))}
+                  </td>
+                  <td>${order.total}</td>
+                  <td>{status[order.status]}</td>
+                  <td>
+                    <button onClick={() => handleStatus(order._id)}>Next Stage</button>
+                  </td>
+                </tr>
+              </tbody>
+            ))}
         </table>
       </div>
     </div>

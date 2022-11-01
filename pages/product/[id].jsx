@@ -32,7 +32,7 @@ const Product = ({ burger }) => {
     }
   };
   const handleClick = () => {
-    dispatch(addProduct({ ...burger, extras, price, quantity }));
+    dispatch(addProduct({ ...burger, extras, price, quantity, size }));
   };
   return (
     <div className={styles.container}>
@@ -83,7 +83,7 @@ const Product = ({ burger }) => {
             onChange={(e) => setQuantity(e.target.value)}
           />
           <button className={styles.button} onClick={handleClick}>
-            Add to Cart
+            Add to order
           </button>
         </div>
       </div>

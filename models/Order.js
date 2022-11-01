@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const OrderSchema = new mongoose.Schema(
   {
@@ -24,6 +24,7 @@ const OrderSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    orderDetails: { type: Schema.Types.Mixed },
   },
   { timestamps: true }
 );

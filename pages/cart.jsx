@@ -14,13 +14,13 @@ import { useRouter } from "next/router";
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [cash, setCash] = useState(false);
   const amount = cart.total;
   const currency = "AUD";
   const style = { layout: "vertical" };
-
   const createOrder = async (data) => {
     try {
       const res = await axios.post("http://localhost:3000/api/orders", data);
@@ -80,6 +80,7 @@ const Cart = () => {
               createOrder({
                 customer: shipping.name.full_name,
                 address: shipping.address.address_line_1,
+                orderDetails: cart.products,
                 total: cart.total,
                 method: 1,
               });
@@ -90,14 +91,21 @@ const Cart = () => {
     );
   };
 
+  console.log(
+    "cartFind",
+    cart.products.map((item) => {
+      return Object.assign({}, { title: item.title });
+    })
+  );
   return (
     <div className={styles.container}>
       <div className={styles.left}>
         <table className={styles.table}>
           <tbody>
             <tr className={styles.trTitle}>
-              <th>Product</th>
-              <th>Name</th>
+              <th></th>
+              <th>ProductName</th>
+              <th>Size</th>
               <th>Extras</th>
               <th>Price</th>
               <th>Quantity</th>
@@ -106,14 +114,20 @@ const Cart = () => {
           </tbody>
           <tbody className={styles.tbody}>
             {cart.products.map((product) => (
-              <tr className={styles.tr} key={product._id}>
+              <tr className={styles.tr} key={product.title}>
                 <td>
                   <div className={styles.imgContainer}>
                     <Image src={product.img} layout="fill" objectFit="cover" alt="" />
                   </div>
                 </td>
+
                 <td>
                   <span className={styles.name}>{product.title}</span>
+                </td>
+                <td>
+                  <span>
+                    {product.size === 0 ? "Small" : product.size === 1 ? "Medium" : "Large"}
+                  </span>
                 </td>
                 <td>
                   <span className={styles.extras}>
@@ -150,9 +164,6 @@ const Cart = () => {
           </div>
           {open ? (
             <div className={styles.paymentMethods}>
-              {/* <button className={styles.payButton} onClick={() => setCash(true)}>
-                CASH ON DELIVERY
-              </button> */}
               <PayPalScriptProvider
                 options={{
                   "client-id":
