@@ -1,5 +1,7 @@
 import styles from "../styles/Cart.module.css";
 import Image from "next/image";
+import DeleteSweepOutlinedIcon from "@mui/icons-material/DeleteSweepOutlined";
+import { IconButton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
@@ -91,12 +93,6 @@ const Cart = () => {
     );
   };
 
-  console.log(
-    "cartFind",
-    cart.products.map((item) => {
-      return Object.assign({}, { title: item.title });
-    })
-  );
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -104,12 +100,17 @@ const Cart = () => {
           <tbody>
             <tr className={styles.trTitle}>
               <th></th>
-              <th>ProductName</th>
+              <th>Product</th>
               <th>Size</th>
-              <th>Extras</th>
+              <th>Meal options</th>
               <th>Price</th>
               <th>Quantity</th>
               <th>Total</th>
+              <th>
+                <IconButton aria-label="delete" onClick={() => dispatch(reset())}>
+                  <DeleteSweepOutlinedIcon fontSize="small" />
+                </IconButton>
+              </th>
             </tr>
           </tbody>
           <tbody className={styles.tbody}>
@@ -120,7 +121,6 @@ const Cart = () => {
                     <Image src={product.img} layout="fill" objectFit="cover" alt="" />
                   </div>
                 </td>
-
                 <td>
                   <span className={styles.name}>{product.title}</span>
                 </td>
@@ -131,9 +131,9 @@ const Cart = () => {
                 </td>
                 <td>
                   <span className={styles.extras}>
-                    {product.extras.map((extra) => (
-                      <span key={extra._id}>{extra.text} </span>
-                    ))}
+                    {product.extras.length !== 0
+                      ? product.extras.map((extra) => <span key={extra._id}>{extra.text} </span>)
+                      : "Nil"}
                   </span>
                 </td>
                 <td>
@@ -157,7 +157,7 @@ const Cart = () => {
             <b className={styles.totalTextTitle}>Subtotal:</b>${cart.total}
           </div>
           <div className={styles.totalText}>
-            <b className={styles.totalTextTitle}>Discount:</b>$0.00
+            <b className={styles.totalTextTitle}>Delivery fee:</b>$0.00
           </div>
           <div className={styles.totalText}>
             <b className={styles.totalTextTitle}>Total:</b>${cart.total}

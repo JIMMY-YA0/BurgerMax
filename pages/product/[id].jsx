@@ -10,6 +10,7 @@ const Product = ({ burger }) => {
   const [size, setSize] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [extras, setExtras] = useState([]);
+  const [sizeSelected, setSizeSelected] = useState(true);
   const dispatch = useDispatch();
 
   const changePrice = (number) => {
@@ -18,6 +19,7 @@ const Product = ({ burger }) => {
   const handleSize = (sizeIndex) => {
     const difference = burger.prices[sizeIndex] - burger.prices[size];
     setSize(sizeIndex);
+    setSizeSelected(true);
     changePrice(difference);
   };
 
@@ -48,15 +50,28 @@ const Product = ({ burger }) => {
         <h3 className={styles.choose}>Choose the size</h3>
         <div className={styles.sizes}>
           <div className={styles.size} onClick={() => handleSize(0)}>
-            <Image src="/img/size.png" layout="fill" alt="" />
+            {sizeSelected && size == 0 ? (
+              <Image src="/img/size-selected.png" layout="fill" alt="" />
+            ) : (
+              <Image src="/img/size.png" layout="fill" alt="" />
+            )}
             <span className={styles.number}>Small</span>
           </div>
           <div className={styles.size} onClick={() => handleSize(1)}>
-            <Image src="/img/size.png" layout="fill" alt="" />
+            {sizeSelected && size == 1 ? (
+              <Image src="/img/size-selected.png" layout="fill" alt="" />
+            ) : (
+              <Image src="/img/size.png" layout="fill" alt="" />
+            )}
+
             <span className={styles.number}>Medium</span>
           </div>
           <div className={styles.size} onClick={() => handleSize(2)}>
-            <Image src="/img/size.png" layout="fill" alt="" />
+            {sizeSelected && size == 2 ? (
+              <Image src="/img/size-selected.png" layout="fill" alt="" />
+            ) : (
+              <Image src="/img/size.png" layout="fill" alt="" />
+            )}
             <span className={styles.number}>Large</span>
           </div>
         </div>
