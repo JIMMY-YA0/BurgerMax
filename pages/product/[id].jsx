@@ -94,6 +94,7 @@ const Product = ({ burger }) => {
           <input
             type="number"
             defaultValue={1}
+            min="1"
             className={styles.quantity}
             onChange={(e) => setQuantity(e.target.value)}
           />
