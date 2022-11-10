@@ -5,6 +5,8 @@ import Featured from "../components/Featured";
 import BurgerList from "../components/BurgerList";
 import styles from "../styles/Home.module.css";
 
+axios.defaults.baseURL = process.env.DEV_URL || process.env.PROD_URL;
+
 export default function Home({ burgerList, admin }) {
   return (
     <div className={styles.container}>
@@ -27,7 +29,7 @@ export const getServerSideProps = async (ctx) => {
     admin = true;
   }
 
-  const res = await axios.get("http://localhost:3000/api/products");
+  const res = await axios.get(`/api/products`);
   return {
     props: {
       burgerList: res.data,

@@ -57,7 +57,7 @@ const Add = ({ setClose }) => {
         theme: "dark",
       });
 
-      await axios.post("http://localhost:3000/api/products", newProduct);
+      await axios.post(`/api/products`, newProduct);
       // setClose(true);
       Router.reload();
     } catch (err) {

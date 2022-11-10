@@ -12,7 +12,7 @@ const Index = ({ orders, products }) => {
   const status = ["Preparing", "On the way", "Delivered"];
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete("http://localhost:3000/api/products/" + id); //jiuzheyang
+      const res = await axios.delete(`/api/products/` + id); //jiuzheyang
       toast.warn("Food has been uccessfully deleted！", {
         position: "bottom-center",
         autoClose: 2000,
@@ -36,12 +36,12 @@ const Index = ({ orders, products }) => {
 
     try {
       if (currentStatus < 2) {
-        const res = await axios.put("http://localhost:3000/api/orders/" + id, {
+        const res = await axios.put(`/api/orders/` + id, {
           status: currentStatus + 1,
         });
         setOrderList([res.data, ...orderList.filter((order) => order._id !== id)]);
       } else {
-        const res = await axios.put("http://localhost:3000/api/orders/" + id, {
+        const res = await axios.put(`/api/orders/` + id, {
           status: 0,
         });
         setOrderList([res.data, ...orderList.filter((order) => order._id !== id)]);
@@ -163,8 +163,8 @@ export const getServerSideProps = async (ctx) => {
     };
   }
 
-  const productRes = await axios.get("http://localhost:3000/api/products");
-  const orderRes = await axios.get("http://localhost:3000/api/orders");
+  const productRes = await axios.get(`/api/products`);
+  const orderRes = await axios.get(`/api/orders`);
 
   return {
     props: {
