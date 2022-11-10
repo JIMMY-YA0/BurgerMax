@@ -1,7 +1,9 @@
 import { useState } from "react";
 import styles from "../styles/Add.module.css";
 import axios from "axios";
-import { useRouter } from "next/router";
+import Router from "next/router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Add = ({ setClose }) => {
   const [file, setFile] = useState(null);
@@ -44,9 +46,31 @@ const Add = ({ setClose }) => {
         img: url,
       };
 
+      toast.success("Food Item Added to Menu!", {
+        position: "bottom-center",
+        autoClose: 3500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
       await axios.post("http://localhost:3000/api/products", newProduct);
-      setClose(true);
+      // setClose(true);
+      Router.reload();
     } catch (err) {
+      toast.warn("Failed to Add Item Added to Menu!", {
+        position: "bottom-center",
+        autoClose: 3500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       console.log(err);
     }
   };
@@ -125,6 +149,17 @@ const Add = ({ setClose }) => {
         <button className={styles.addButton} onClick={handleCreate}>
           Create
         </button>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
     </div>
   );

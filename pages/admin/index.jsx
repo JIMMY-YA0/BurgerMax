@@ -4,14 +4,25 @@ import { useState } from "react";
 import Add from "../../components/Add";
 import AddButton from "../../components/AddButton";
 import styles from "../../styles/Admin.module.css";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Index = ({ orders, products }) => {
   const [burgerList, setBurgerList] = useState(products);
   const [orderList, setOrderList] = useState(orders);
   const status = ["Preparing", "On the way", "Delivered"];
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete("http://localhost:3000/api/products/" + id);
+      const res = await axios.delete("http://localhost:3000/api/products/" + id); //jiuzheyang
+      toast.warn("Food has been uccessfully deleted！", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       setBurgerList(burgerList.filter((burger) => burger._id !== id));
     } catch (err) {
       console.log(err);
@@ -119,6 +130,17 @@ const Index = ({ orders, products }) => {
                   <td>{status[order.status]}</td>
                   <td>
                     <button onClick={() => handleStatus(order._id)}>Next Stage</button>
+                    <ToastContainer
+                      position="bottom-center"
+                      autoClose={2000}
+                      hideProgressBar={false}
+                      newestOnTop
+                      closeOnClick
+                      rtl={false}
+                      pauseOnFocusLoss
+                      draggable
+                      pauseOnHover
+                    />
                   </td>
                 </tr>
               </tbody>
