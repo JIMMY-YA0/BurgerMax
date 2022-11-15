@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "../styles/Add.module.css";
+import LoadingButton from "@mui/lab/LoadingButton";
 import axios from "axios";
 import Router from "next/router";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,7 +13,7 @@ const Add = ({ setClose }) => {
   const [prices, setPrices] = useState([]);
   const [extraOptions, setExtraOptions] = useState([]);
   const [extra, setExtra] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   const changePrice = (e, index) => {
     const currentPrices = prices;
     currentPrices[index] = e.target.value;
@@ -28,6 +29,7 @@ const Add = ({ setClose }) => {
   };
 
   const handleCreate = async () => {
+    setLoading(true);
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", "uploads");
@@ -146,9 +148,20 @@ const Add = ({ setClose }) => {
             ))}
           </div>
         </div>
-        <button className={styles.addButton} onClick={handleCreate}>
+        {/* <button className={styles.addButton} onClick={handleCreate}>
           Create
-        </button>
+        </button> */}
+        <LoadingButton
+          size="small"
+          color="secondary"
+          onClick={handleCreate}
+          loading={loading}
+          loadingPosition="start"
+          startIcon={<SaveIcon />}
+          variant="contained"
+        >
+          Save1
+        </LoadingButton>
         <ToastContainer
           position="bottom-center"
           autoClose={5000}

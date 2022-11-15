@@ -6,6 +6,9 @@ import AddButton from "../../components/AddButton";
 import styles from "../../styles/Admin.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Button, Link } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 const Index = ({ orders, products }) => {
   const [burgerList, setBurgerList] = useState(products);
   const [orderList, setOrderList] = useState(orders);
@@ -13,9 +16,9 @@ const Index = ({ orders, products }) => {
   const handleDelete = async (id) => {
     try {
       const res = await axios.delete(`/api/products/` + id); //jiuzheyang
-      toast.warn("Food has been uccessfully deleted！", {
+      toast.warn("Food has been successfully deleted！", {
         position: "bottom-center",
-        autoClose: 2000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -51,6 +54,9 @@ const Index = ({ orders, products }) => {
     }
   };
   const [close, setClose] = useState(true);
+  const [showProductId, setShowProductId] = useState(false);
+  const [showOrderId, setShowOrderId] = useState(false);
+
   return (
     <div className={styles.container}>
       {/* Products List */}
@@ -76,18 +82,37 @@ const Index = ({ orders, products }) => {
               <tbody key={product._id}>
                 <tr>
                   <td>
-                    <Image src={product.img} width={50} height={50} objectFit="cover" alt="" />
+                    <Image
+                      src={product.img}
+                      width={50}
+                      height={50}
+                      objectFit="cover"
+                      alt=""
+                      loading="lazy"
+                    />
                   </td>
-                  <td>{product._id}</td>
+                  <td onClick={() => setShowProductId((prevState) => !prevState)}>
+                    {showProductId ? product._id : product._id.slice(0, 7) + "..."}
+                  </td>
                   <td>{product.title}</td>
                   <td>
                     ${product.prices[0]}-${product.prices[1]}-${product.prices[2]}
                   </td>
-                  <td>
-                    <button className={styles.button}>Edit</button>
-                    <button className={styles.button} onClick={() => handleDelete(product._id)}>
+                  <td className={styles.button}>
+                    <Link href={`/product/${product._id}`} target="_blank">
+                      <Button variant="contained" color="warning" sx={{ mb: 0.4, mr: 0.4, p: 0.1 }}>
+                        View
+                      </Button>
+                    </Link>
+                    <Button
+                      variant="outlined"
+                      color="error"
+                      size="small"
+                      sx={{ width: 2, p: 0.1 }}
+                      onClick={() => handleDelete(product._id)}
+                    >
                       Delete
-                    </button>
+                    </Button>
                   </td>
                 </tr>
               </tbody>
@@ -114,13 +139,16 @@ const Index = ({ orders, products }) => {
             .map((order) => (
               <tbody key={order._id}>
                 <tr>
-                  <td>{order._id}</td>
+                  <td onClick={() => setShowOrderId((prevState) => !prevState)}>
+                    {" "}
+                    {showOrderId ? order._id : order._id.slice(0, 7) + "..."}
+                  </td>
                   <td>{order.customer}</td>
-                  <td>
+                  <td className={styles.orderDetails}>
                     {order.orderDetails.map((item) => (
                       <span key={item._id}>
                         {item.quantity} X {item.title}(
-                        {item.size === 0 ? "S" : item.size === 1 ? "M" : "L"}) Options:{" "}
+                        {item.size === 0 ? "S" : item.size === 1 ? "M" : "L"}) Extras:{" "}
                         {item.extraOptions.map((item) => item.text + " ")}
                         <br />
                       </span>
@@ -128,20 +156,31 @@ const Index = ({ orders, products }) => {
                   </td>
                   <td>${order.total}</td>
                   <td>{status[order.status]}</td>
-                  <td>
-                    <button onClick={() => handleStatus(order._id)}>Next Stage</button>
-                    <ToastContainer
-                      position="bottom-center"
-                      autoClose={2000}
-                      hideProgressBar={false}
-                      newestOnTop
-                      closeOnClick
-                      rtl={false}
-                      pauseOnFocusLoss
-                      draggable
-                      pauseOnHover
-                    />
+                  <td className={styles.button}>
+                    <Link href={`/orders/${order._id}`} target="_blank">
+                      <Button variant="contained" color="warning" sx={{ mb: 0.4, mr: 0.4, p: 0.1 }}>
+                        View
+                      </Button>
+                    </Link>
+                    <Button
+                      variant="contained"
+                      sx={{ p: 0.5, pl: 1, pr: 1 }}
+                      onClick={() => handleStatus(order._id)}
+                    >
+                      Next Stage
+                    </Button>
                   </td>
+                  <ToastContainer
+                    position="bottom-center"
+                    autoClose={1000}
+                    hideProgressBar={false}
+                    newestOnTop
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                  />
                 </tr>
               </tbody>
             ))}

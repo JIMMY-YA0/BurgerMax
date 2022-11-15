@@ -1,10 +1,11 @@
 .container {
-  padding: 50px;
   display: flex;
+  padding: 5rem 0;
+  min-height: 100vh;
 }
 
 .left {
-  flex: 2;
+  flex: 3;
 }
 
 .right {
@@ -13,21 +14,20 @@
 
 .imgContainer {
   display: flex;
-  width: 100px;
-  height: 100px;
+  width: 4rem;
+  height: 4rem;
   position: relative;
   margin: auto;
 }
 
 .table {
   width: 100%;
-  border-spacing: 20px;
+  border-spacing: 0.2rem;
   text-align: center;
 }
 
 .name {
   font-weight: 500;
-  color: #d1411e;
   font-size: 18px;
 }
 
@@ -37,33 +37,59 @@
 }
 
 .wrapper {
-  width: 90%;
   max-height: 300px;
   background-color: #333;
-  padding: 50px;
+  padding: 30px;
   padding-top: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   color: white;
+  align-items: left;
+  margin: 0 1rem;
+}
+
+.title {
+  border-bottom: 1px solid white;
 }
 
 .totalTextTitle {
   margin-right: 10px;
 }
 
+.paymentMethods {
+  padding: 1rem 0;
+}
+
 .button {
-  height: 30px;
+  width: 100%;
+  min-width: 140px;
   color: #d1411e;
   font-weight: bold;
   cursor: pointer;
   margin-top: 20px;
+  padding: 0.3rem;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  .right {
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+  .button {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 480px) {
   .container {
     flex-direction: column;
     padding: 20px;
+    position: relative;
   }
 
   .table {
@@ -73,8 +99,15 @@
     justify-content: center;
   }
 
-  .trTitle {
+  .trTitle th:not(:last-child) {
     display: none;
+  }
+
+  .trTitle th:last-child {
+    position: absolute;
+    top: -40.5rem;
+    right: 1rem;
+    font-size: 50rem;
   }
 
   .tr {
@@ -112,10 +145,6 @@
   .total::before {
     content: "Total: ";
     font-weight: 500;
-  }
-
-  .wrapper {
-    width: 100%;
   }
 }
 

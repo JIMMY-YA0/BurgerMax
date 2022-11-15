@@ -1,9 +1,14 @@
 .container {
-  height: calc(100vh - 100px);
+  height: calc(100vh - 6rem);
   background-color: #1e1c1c;
   overflow: hidden;
   position: relative;
   background-image: url("../public/img/backgroud.png");
+  /* background-repeat: no-repeat; */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .arrowContainer {
@@ -30,7 +35,7 @@
   position: relative;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
   .container {
     height: 50vh;
   }

@@ -5,13 +5,16 @@ const Footer = () => {
   return (
     <div className={styles.container}>
       <div className={styles.item}>
-        <Image src="/img/LOGO.png" objectFit="cover" layout="fill" alt="" />
+        <Image src="/img/LOGO.png" objectFit="contain" layout="fill" alt="" />
       </div>
       <div className={styles.item}>
         <div className={styles.card}>
-          <h2 className={styles.motto}>
-            OH YES, WE DID. <br /> BURGERMAX, <br /> MAKING YOUR DREAM BURGER COME TRUE.
-          </h2>
+          <h1 className={styles.title}>Discovery BurgerMax</h1>
+          <p className={styles.text}>Home</p>
+          <p className={styles.text}>Blog</p>
+          <p className={styles.text}>Careers</p>
+          <p className={styles.text}>About us</p>
+          <p className={styles.text}>Contact us</p>
         </div>
         <div className={styles.card}>
           <h1 className={styles.title}>FIND OUR RESTAURANTS</h1>

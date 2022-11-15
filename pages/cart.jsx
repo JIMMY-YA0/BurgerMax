@@ -22,7 +22,7 @@ const Cart = () => {
   const [cash, setCash] = useState(false);
   const amount = cart.total;
   const currency = "AUD";
-  const style = { layout: "vertical" };
+  const style = { layout: "vertical", size: "responsive" };
   const createOrder = async (data) => {
     try {
       const res = await axios.post("http://localhost:3000/api/orders", data);
@@ -137,13 +137,17 @@ const Cart = () => {
                   </span>
                 </td>
                 <td>
-                  <span className={styles.price}>${product.price}</span>
+                  <span className={styles.price}>
+                    ${Math.round((product.price * 100) / 100).toFixed(2)}
+                  </span>
                 </td>
                 <td>
                   <span className={styles.quantity}>{product.quantity}</span>
                 </td>
                 <td>
-                  <span className={styles.total}>${product.price * product.quantity}</span>
+                  <span className={styles.total}>
+                    ${Math.round((product.price * product.quantity * 100) / 100).toFixed(2)}
+                  </span>
                 </td>
               </tr>
             ))}
@@ -154,13 +158,15 @@ const Cart = () => {
         <div className={styles.wrapper}>
           <h2 className={styles.title}>CART TOTAL</h2>
           <div className={styles.totalText}>
-            <b className={styles.totalTextTitle}>Subtotal:</b>${cart.total}
+            <b className={styles.totalTextTitle}>Subtotal:</b> $
+            {(Math.round(cart.total * 100) / 100).toFixed(2)}
           </div>
           <div className={styles.totalText}>
             <b className={styles.totalTextTitle}>Delivery fee:</b>$0.00
           </div>
           <div className={styles.totalText}>
-            <b className={styles.totalTextTitle}>Total:</b>${cart.total}
+            <b className={styles.totalTextTitle}>Total:</b>$
+            {(Math.round(cart.total * 100) / 100).toFixed(2)}
           </div>
           {open ? (
             <div className={styles.paymentMethods}>

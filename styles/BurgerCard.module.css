@@ -1,67 +1,58 @@
 .container {
-  border-width: 1px;
+  /* border-width: 0.0625rem; */
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-  border-radius: 8px;
-  padding: 8px;
-  margin: 30px;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
   transition-duration: 300ms;
 }
 
 .container:hover {
   transform: scale(1.1);
+  cursor: pointer;
 }
 
 .image {
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  cursor: pointer;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  transition-duration: 500ms;
 }
 .image:hover {
   transform: scale(1.05);
-  transition-duration: 500ms;
 }
 
 .wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 60px;
-  font-size: 14px;
-  line-height: 20px;
-  margin-top: 8px;
+  max-height: 3rem;
+  line-height: 1.25rem;
+  margin: 0.5rem 0;
 }
 
 .title {
-  font-size: 18px;
+  font-size: 1.25rem;
   font-weight: 700;
   text-align: left;
 }
 
 .price {
   font-weight: 700;
-  font-size: 16px;
+  font-size: 1.25rem;
   margin-top: -10px;
 }
 
 .dollar {
-  font-size: 18px;
-  line-height: 28px;
+  font-size: 1.5rem;
+  line-height: 1.75rem;
 }
 
 @media screen and (max-width: 480px) {
   .container {
-    width: 100%;
+    width: 80%;
+    margin: auto;
   }
 
   .title {
-    font-size: 32px;
-  }
-
-  .dollar {
-    font-size: 28px;
-    line-height: 28px;
-  }
-  .price {
-    font-size: 22px;
+    font-size: 1.5rem;
   }
 }

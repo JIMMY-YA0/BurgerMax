@@ -1,9 +1,9 @@
-import styles from "../styles/BurgerList.module.css";
 import BurgerCard from "./BurgerCard";
+import styles from "../styles/BurgerList.module.css";
 
 const BurgerList = ({ burgerList }) => {
   return (
-    <div className={styles.container}>
+    <div id="menu" className={styles.container}>
       <h1 className={styles.title}>DELIGHT IN EVERY BITE</h1>
       <p className={styles.desc}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut blandit arcu in pretium
