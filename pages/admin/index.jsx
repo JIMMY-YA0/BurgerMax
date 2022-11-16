@@ -7,7 +7,6 @@ import styles from "../../styles/Admin.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Button, Link } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
 
 const Index = ({ orders, products }) => {
   const [burgerList, setBurgerList] = useState(products);
@@ -15,7 +14,7 @@ const Index = ({ orders, products }) => {
   const status = ["Preparing", "On the way", "Delivered"];
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete(`/api/products/` + id); //jiuzheyang
+      const res = await axios.delete(`/api/products/` + id);
       toast.warn("Food has been successfully deleted！", {
         position: "bottom-center",
         autoClose: 1000,
@@ -148,8 +147,10 @@ const Index = ({ orders, products }) => {
                     {order.orderDetails.map((item) => (
                       <span key={item._id}>
                         {item.quantity} X {item.title}(
-                        {item.size === 0 ? "S" : item.size === 1 ? "M" : "L"}) Extras:{" "}
-                        {item.extraOptions.map((item) => item.text + " ")}
+                        {item.size === 0 ? "S" : item.size === 1 ? "M" : "L"})
+                        {item.extras.length > 0
+                          ? " Extras: " + item.extras.map((item) => item.text + " ")
+                          : ""}
                         <br />
                       </span>
                     ))}
@@ -170,21 +171,21 @@ const Index = ({ orders, products }) => {
                       Next Stage
                     </Button>
                   </td>
-                  <ToastContainer
-                    position="bottom-center"
-                    autoClose={1000}
-                    hideProgressBar={false}
-                    newestOnTop
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                  />
                 </tr>
               </tbody>
             ))}
         </table>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
     </div>
   );

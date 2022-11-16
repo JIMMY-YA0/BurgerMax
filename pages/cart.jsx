@@ -2,6 +2,8 @@ import styles from "../styles/Cart.module.css";
 import Image from "next/image";
 import DeleteSweepOutlinedIcon from "@mui/icons-material/DeleteSweepOutlined";
 import { IconButton } from "@mui/material";
+import Button from "@mui/material/Button";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
@@ -114,8 +116,8 @@ const Cart = () => {
             </tr>
           </tbody>
           <tbody className={styles.tbody}>
-            {cart.products.map((product) => (
-              <tr className={styles.tr} key={product.title}>
+            {cart.products.map((product, index) => (
+              <tr className={styles.tr} key={index}>
                 <td>
                   <div className={styles.imgContainer}>
                     <Image src={product.img} layout="fill" objectFit="cover" alt="" />
@@ -183,9 +185,9 @@ const Cart = () => {
               </PayPalScriptProvider>
             </div>
           ) : (
-            <button onClick={() => setOpen(true)} className={styles.button}>
+            <Button onClick={() => setOpen(true)} className={styles.button}>
               CHECKOUT NOW!
-            </button>
+            </Button>
           )}
         </div>
       </div>

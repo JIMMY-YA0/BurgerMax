@@ -11,6 +11,8 @@ const Order = ({ order }) => {
     if (index - status > 1) return styles.undone;
   };
 
+  console.log(order.orderDetails);
+
   return (
     <div className={styles.container}>
       <div className={styles.row}>
@@ -35,8 +37,10 @@ const Order = ({ order }) => {
                 {order.orderDetails.map((item) => (
                   <span key={item._id}>
                     {item.quantity} X {item.title}(
-                    {item.size === 0 ? "S" : item.size === 1 ? "M" : "L"}) Extras:{" "}
-                    {item.extraOptions.map((item) => item.text + " ")}
+                    {item.size === 0 ? "S" : item.size === 1 ? "M" : "L"})
+                    {item.extras.length > 0
+                      ? " Extras: " + item.extras.map((item) => item.text + " ")
+                      : ""}
                     <br />
                   </span>
                 ))}

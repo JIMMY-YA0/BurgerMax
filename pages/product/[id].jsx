@@ -5,6 +5,9 @@ import axios from "axios";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/cartSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Button } from "@mui/material";
 
 const Product = ({ burger }) => {
   const [price, setPrice] = useState(burger.prices[0]);
@@ -35,7 +38,30 @@ const Product = ({ burger }) => {
     }
   };
   const handleClick = () => {
-    dispatch(addProduct({ ...burger, extras, price, quantity, size }));
+    if (quantity > 0 && quantity < 100) {
+      dispatch(addProduct({ ...burger, extras, price, quantity, size }));
+      toast.success("Item is added to your cart!", {
+        position: "bottom-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      toast.error("Invalid Quantity!", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
   };
   return (
     <div className={styles.container}>
@@ -108,14 +134,30 @@ const Product = ({ burger }) => {
             type="number"
             defaultValue={1}
             min="1"
+            max="99"
             className={styles.quantity}
             onChange={(e) => setQuantity(e.target.value)}
           />
-          <button className={styles.button} onClick={handleClick}>
+          {/* <button className={styles.button} onClick={handleClick}>
             Add to order
-          </button>
+          </button> */}
+          <Button className={styles.button} onClick={handleClick}>
+            Add to order
+          </Button>
         </div>
       </div>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };

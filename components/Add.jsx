@@ -3,6 +3,7 @@ import styles from "../styles/Add.module.css";
 import LoadingButton from "@mui/lab/LoadingButton";
 import axios from "axios";
 import Router from "next/router";
+import SaveIcon from "@mui/icons-material/Save";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -50,7 +51,7 @@ const Add = ({ setClose }) => {
 
       toast.success("Food Item Added to Menu!", {
         position: "bottom-center",
-        autoClose: 3500,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -63,9 +64,9 @@ const Add = ({ setClose }) => {
       // setClose(true);
       Router.reload();
     } catch (err) {
-      toast.warn("Failed to Add Item Added to Menu!", {
+      toast.error("Failed to Add Item Added to Menu!", {
         position: "bottom-center",
-        autoClose: 3500,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -74,6 +75,7 @@ const Add = ({ setClose }) => {
         theme: "dark",
       });
       console.log(err);
+      setLoading(false);
     }
   };
 
@@ -148,10 +150,9 @@ const Add = ({ setClose }) => {
             ))}
           </div>
         </div>
-        {/* <button className={styles.addButton} onClick={handleCreate}>
-          Create
-        </button> */}
+
         <LoadingButton
+          className={styles.addButton}
           size="small"
           color="secondary"
           onClick={handleCreate}
@@ -160,11 +161,12 @@ const Add = ({ setClose }) => {
           startIcon={<SaveIcon />}
           variant="contained"
         >
-          Save1
+          Create
         </LoadingButton>
+
         <ToastContainer
           position="bottom-center"
-          autoClose={5000}
+          autoClose={3000}
           hideProgressBar={false}
           newestOnTop
           closeOnClick
