@@ -2,8 +2,6 @@ import styles from "../styles/Cart.module.css";
 import Image from "next/image";
 import DeleteSweepOutlinedIcon from "@mui/icons-material/DeleteSweepOutlined";
 import { IconButton } from "@mui/material";
-import Button from "@mui/material/Button";
-
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
@@ -27,7 +25,7 @@ const Cart = () => {
   const style = { layout: "vertical", size: "responsive", label: "checkout" };
   const createOrder = async (data) => {
     try {
-      const res = await axios.post("http://localhost:3000/api/orders", data);
+      const res = await axios.post(`/api/orders`, data);
       if (res.status === 201) {
         dispatch(reset());
         router.push(`/orders/${res.data._id}`);

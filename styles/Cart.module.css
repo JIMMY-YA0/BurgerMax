@@ -1,7 +1,9 @@
 .container {
   display: flex;
-  padding: 5rem 0;
+  height: calc(100%-6rem);
   min-height: 60vh;
+  padding: 5rem 0;
+  width: 100%;
 }
 
 .left {
@@ -35,7 +37,8 @@
 }
 
 .wrapper {
-  max-height: 330px;
+  /* max-height: 330px; */
+  /* height:500px; */
   background-color: #fce9dcc7;
   padding: 30px;
   padding-top: 10px;
@@ -117,7 +120,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
   }
 
   .imgContainer {
@@ -127,13 +130,13 @@
 
   .name,
   .total {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
 
   .extras,
   .price,
   .quantity {
-    font-size: 22px;
+    font-size: 1.375rem;
   }
 
   .price::before {
@@ -151,15 +154,15 @@
 }
 
 .paymentMethods {
-  margin-top: 10px;
+  margin-top: 0.625rem;
   display: flex;
   flex-direction: column;
 }
 
 .payButton {
-  padding: 10px 5px;
+  padding: 0.625rem 0.313rem;
   cursor: pointer;
-  margin-bottom: 5px;
+  margin-bottom: 0.313rem;
   background-color: white;
   color: teal;
   font-weight: bold;

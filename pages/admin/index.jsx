@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Button, Link } from "@mui/material";
 
 const Index = ({ orders, products }) => {
+  axios.defaults.baseURL = process.env.DEV_URL || process.env.PROD_URL;
   const [burgerList, setBurgerList] = useState(products);
   const [orderList, setOrderList] = useState(orders);
   const status = ["Preparing", "On the way", "Delivered"];
@@ -61,7 +62,7 @@ const Index = ({ orders, products }) => {
       {/* Products List */}
       <div className={styles.item}>
         <div className={styles.productList}>
-          <h1>Products List</h1>
+          <h1 className={styles.title}>Products List</h1>
           {<AddButton setClose={setClose} />}
           {!close && <Add setClose={setClose} />}
         </div>
@@ -121,7 +122,7 @@ const Index = ({ orders, products }) => {
 
       {/* orderList */}
       <div className={styles.item}>
-        <h1>Orders List</h1>
+        <h1 className={styles.title}>Orders List</h1>
         <table className={styles.table}>
           <tbody>
             <tr>

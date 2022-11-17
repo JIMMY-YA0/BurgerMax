@@ -4,11 +4,11 @@ import SendIcon from "@mui/icons-material/Send";
 
 const AddButton = ({ setClose }) => {
   return (
-    <div className={styles.mainAddButton}>
+    <div>
       <Button
         variant="outlined"
         endIcon={<SendIcon />}
-        size="medium"
+        size="small"
         onClick={() => setClose(false)}
       >
         Add new product
