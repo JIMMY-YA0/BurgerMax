@@ -144,8 +144,8 @@ const Index = ({ orders, products }) => {
                   </td>
                   <td>{order.customer}</td>
                   <td className={styles.orderDetails}>
-                    {order.orderDetails.map((item) => (
-                      <span key={item._id}>
+                    {order.orderDetails.map((item, index) => (
+                      <span key={index}>
                         {item.quantity} X {item.title}(
                         {item.size === 0 ? "S" : item.size === 1 ? "M" : "L"})
                         {item.extras.length > 0

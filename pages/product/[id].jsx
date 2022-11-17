@@ -3,11 +3,17 @@ import Image from "next/image";
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import { orange } from "@mui/material/colors";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/cartSlice";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Button } from "@mui/material";
+import { Add } from "@mui/icons-material";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 
 const Product = ({ burger }) => {
   const [price, setPrice] = useState(burger.prices[0]);
@@ -38,7 +44,7 @@ const Product = ({ burger }) => {
     }
   };
   const handleClick = () => {
-    if (quantity > 0 && quantity < 100) {
+    if (quantity > 0 && quantity < 100 && quantity % 1 === 0) {
       dispatch(addProduct({ ...burger, extras, price, quantity, size }));
       toast.success("Item is added to your cart!", {
         position: "bottom-center",
@@ -118,30 +124,59 @@ const Product = ({ burger }) => {
         <div className={styles.ingredients}>
           {burger.extraOptions.map((option) => (
             <div className={styles.option} key={option._id}>
-              <input
+              {/* <input
                 type="checkbox"
                 id={option.text}
                 name={option.text}
                 className={styles.checkbox}
                 onChange={(e) => handlechange(e, option)}
+              /> */}
+              {/* <label htmlFor="double">{option.text}</label> */}
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    sx={{
+                      color: orange[300],
+                      "&.Mui-checked": {
+                        color: orange[500],
+                      },
+                    }}
+                  />
+                }
+                label={option.text}
+                onChange={(e) => handlechange(e, option)}
               />
-              <label htmlFor="double">{option.text}</label>
             </div>
           ))}
         </div>
         <div className={styles.add}>
-          <input
-            type="number"
-            defaultValue={1}
-            min="1"
-            max="99"
-            className={styles.quantity}
+          <TextField
+            size="small"
+            color="success"
+            sx={{ width: 80 }}
             onChange={(e) => setQuantity(e.target.value)}
+            id="outlined-number"
+            label="Quantity"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            // placeholder={"[1-100]"}
+            defaultValue={1}
+            inputProps={{ inputMode: "numeric", min: 1, max: 99, pattern: "[1-99]*" }}
+            // InputProps={{ inputProps: { min: 0, max: 99 } }}
           />
           {/* <button className={styles.button} onClick={handleClick}>
             Add to order
           </button> */}
-          <Button className={styles.button} onClick={handleClick}>
+          <Button
+            variant="contained"
+            color="success"
+            startIcon={<Add />}
+            sx={{ m: 1 }}
+            className={styles.button}
+            onClick={handleClick}
+          >
             Add to order
           </Button>
         </div>

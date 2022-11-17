@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -36,9 +37,10 @@ const Login = () => {
           className={styles.input}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={handleClick} className={styles.button}>
+
+        <Button variant="contained" color="success" onClick={handleClick}>
           Sign In
-        </button>
+        </Button>
         {error && <span className={styles.error}>Unauthorized login attemps!</span>}
       </div>
     </div>

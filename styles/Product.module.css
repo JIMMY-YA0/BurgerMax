@@ -113,17 +113,22 @@
   height: 1.875rem;
 }
 
-.button {
+.add {
+  display: flex;
+  align-items: center;
+}
+
+/* .button {
   margin-left: 0.625rem;
   background-color: #fe971a;
   color: white;
   border: none;
   font-weight: 500;
-}
+} */
 
-.button:hover {
+/* .button:hover {
   background-color: #fea500e6;
-}
+} */
 
 @media screen and (max-width: 640px) {
   .container {
@@ -190,6 +195,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .add {
+    flex-direction: column;
     margin-top: 1rem;
   }
 }

@@ -24,7 +24,7 @@ const Cart = () => {
   const [cash, setCash] = useState(false);
   const amount = cart.total;
   const currency = "AUD";
-  const style = { layout: "vertical", size: "responsive" };
+  const style = { layout: "vertical", size: "responsive", label: "checkout" };
   const createOrder = async (data) => {
     try {
       const res = await axios.post("http://localhost:3000/api/orders", data);
@@ -158,7 +158,7 @@ const Cart = () => {
       </div>
       <div className={styles.right}>
         <div className={styles.wrapper}>
-          <h2 className={styles.title}>CART TOTAL</h2>
+          <h2 className={styles.title}>Cart Summary</h2>
           <div className={styles.totalText}>
             <b className={styles.totalTextTitle}>Subtotal:</b> $
             {(Math.round(cart.total * 100) / 100).toFixed(2)}
@@ -170,7 +170,7 @@ const Cart = () => {
             <b className={styles.totalTextTitle}>Total:</b>$
             {(Math.round(cart.total * 100) / 100).toFixed(2)}
           </div>
-          {open ? (
+          {
             <div className={styles.paymentMethods}>
               <PayPalScriptProvider
                 options={{
@@ -178,17 +178,13 @@ const Cart = () => {
                     "Ab0ZnwkX9gk76_u-OwVPLM2PG3bfYlSU8J-7FQyD0-O7qHQBItnCg0WD7RUf1bz2BqBSms-itpKsGf2y",
                   components: "buttons",
                   currency: "AUD",
-                  "disable-funding": "credit,card",
+                  // "disable-funding": "credit,card",
                 }}
               >
                 <ButtonWrapper currency={currency} showSpinner={false} />
               </PayPalScriptProvider>
             </div>
-          ) : (
-            <Button onClick={() => setOpen(true)} className={styles.button}>
-              CHECKOUT NOW!
-            </Button>
-          )}
+          }
         </div>
       </div>
     </div>

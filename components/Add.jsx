@@ -3,6 +3,7 @@ import styles from "../styles/Add.module.css";
 import LoadingButton from "@mui/lab/LoadingButton";
 import axios from "axios";
 import Router from "next/router";
+import { Button } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -138,9 +139,9 @@ const Add = ({ setClose }) => {
               name="price"
               onChange={handleExtraInput}
             />
-            <button className={styles.extraButton} onClick={handleExtra}>
+            <Button size="small" variant="contained" color="success" onClick={handleExtra}>
               Add
-            </button>
+            </Button>
           </div>
           <div className={styles.extraItems}>
             {extraOptions.map((option) => (

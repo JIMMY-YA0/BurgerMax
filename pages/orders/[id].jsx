@@ -35,7 +35,7 @@ const Order = ({ order }) => {
               </td>
               <td className={styles.item}>
                 {order.orderDetails.map((item) => (
-                  <span key={item._id}>
+                  <span key={order._id}>
                     {item.quantity} X {item.title}(
                     {item.size === 0 ? "S" : item.size === 1 ? "M" : "L"})
                     {item.extras.length > 0
