@@ -1,6 +1,6 @@
 .container {
   width: 100vw;
-  background-image: url(../public/img/footerbg.png);
+  background-image: url(../public/img/backgroud.png);
   background-color: #222;
   display: flex;
   -webkit-background-size: cover;
