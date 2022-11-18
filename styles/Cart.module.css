@@ -98,21 +98,20 @@
   }
 
   .table {
-    display: flex;
-    flex-direction: column;
+    display: block;
+    /* flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
   }
 
-  .trTitle th:not(:last-child) {
+  .trTitle th {
     display: none;
   }
 
-  .trTitle th:last-child {
+  .clear {
     position: absolute;
-    top: -40.5rem;
+    top: 0.5rem;
     right: 1rem;
-    font-size: 50rem;
   }
 
   .tr {
@@ -123,6 +122,20 @@
     margin-bottom: 1.25rem;
   }
 
+  .tr td:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(3)) {
+    width: 80%;
+    text-align: left;
+  }
+
+  .tr td:not(:nth-child(1)) .td::before {
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
   .imgContainer {
     width: 35vw;
     height: 35vw;
@@ -137,6 +150,11 @@
   .price,
   .quantity {
     font-size: 1.375rem;
+  }
+
+  .extras::before {
+    content: "Meal Options: ";
+    font-weight: 500;
   }
 
   .price::before {

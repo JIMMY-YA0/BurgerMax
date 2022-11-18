@@ -16,6 +16,7 @@ const Add = ({ setClose }) => {
   const [extraOptions, setExtraOptions] = useState([]);
   const [extra, setExtra] = useState(null);
   const [loading, setLoading] = useState(false);
+  axios.defaults.baseURL = process.env.PROD_URL;
   const changePrice = (e, index) => {
     const currentPrices = prices;
     currentPrices[index] = e.target.value;
@@ -50,6 +51,7 @@ const Add = ({ setClose }) => {
         img: url,
       };
 
+      await axios.post(`/api/products`, newProduct);
       toast.success("Food Item Added to Menu!", {
         position: "bottom-center",
         autoClose: 3000,
@@ -60,9 +62,6 @@ const Add = ({ setClose }) => {
         progress: undefined,
         theme: "dark",
       });
-
-      await axios.post(`/api/products`, newProduct);
-      // setClose(true);
       Router.reload();
     } catch (err) {
       toast.error("Failed to Add Item Added to Menu!", {

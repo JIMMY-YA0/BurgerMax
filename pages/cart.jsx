@@ -106,11 +106,14 @@ const Cart = () => {
               <th>Price</th>
               <th>Quantity</th>
               <th>Total</th>
-              <th>
-                <IconButton aria-label="delete" onClick={() => dispatch(reset())}>
-                  <DeleteSweepOutlinedIcon fontSize="small" />
-                </IconButton>
-              </th>
+
+              <IconButton
+                className={styles.clear}
+                aria-label="delete"
+                onClick={() => dispatch(reset())}
+              >
+                <DeleteSweepOutlinedIcon fontSize="small" />
+              </IconButton>
             </tr>
           </tbody>
           <tbody className={styles.tbody}>
@@ -132,13 +135,13 @@ const Cart = () => {
                 <td>
                   <span className={styles.extras}>
                     {product.extras.length !== 0
-                      ? product.extras.map((extra) => <span key={extra._id}>{extra.text} </span>)
+                      ? product.extras.map((extra) => <span key={extra._id}>{extra.text}; </span>)
                       : "Nil"}
                   </span>
                 </td>
                 <td>
                   <span className={styles.price}>
-                    ${Math.round((product.price * 100) / 100).toFixed(2)}
+                    ${(Math.round(product.price * 100) / 100).toFixed(2)}
                   </span>
                 </td>
                 <td>
@@ -146,7 +149,7 @@ const Cart = () => {
                 </td>
                 <td>
                   <span className={styles.total}>
-                    ${Math.round((product.price * product.quantity * 100) / 100).toFixed(2)}
+                    ${(Math.round(product.price * product.quantity * 100) / 100).toFixed(2)}
                   </span>
                 </td>
               </tr>

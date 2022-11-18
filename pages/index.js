@@ -5,7 +5,7 @@ import Featured from "../components/Featured";
 import BurgerList from "../components/BurgerList";
 import styles from "../styles/Home.module.css";
 
-axios.defaults.baseURL = process.env.DEV_URL || process.env.PROD_URL;
+axios.defaults.baseURL = process.env.PROD_URL;
 
 export default function Home({ burgerList, admin }) {
   return (

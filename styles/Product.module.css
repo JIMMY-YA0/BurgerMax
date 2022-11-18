@@ -26,7 +26,7 @@
 }
 
 .back {
-  position: fixed;
+  position: sticky;
   top: 6.5rem;
   left: 0.5rem;
   cursor: pointer;
@@ -91,8 +91,8 @@
 .ingredients {
   display: flex;
   width: 80%;
-  margin-bottom: 1.875rem;
   flex-wrap: wrap;
+  margin-bottom: 1.875rem;
 }
 
 .option {
@@ -159,15 +159,14 @@
   .sizes {
     width: 100%;
     justify-content: center;
-    padding: 0 1.25rem;
   }
 
   .ingredients {
-    width: 65%;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    justify-items: start;
-    gap: 0.5rem;
+    width: 80%;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+
     padding-top: 0rem;
     margin: auto;
   }
@@ -189,13 +188,10 @@
     padding: 0.625rem 1.25rem;
     margin-top: 0.25rem;
   }
-}
-@media screen and (max-width: 480px) {
-  .ingredients {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
   .add {
     flex-direction: column;
     margin-top: 1rem;
   }
+}
+@media screen and (max-width: 480px) {
 }

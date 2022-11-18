@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Button, Link } from "@mui/material";
 
 const Index = ({ orders, products }) => {
-  axios.defaults.baseURL = process.env.DEV_URL || process.env.PROD_URL;
+  axios.defaults.baseURL = process.env.PROD_URL;
   const [burgerList, setBurgerList] = useState(products);
   const [orderList, setOrderList] = useState(orders);
   const status = ["Preparing", "On the way", "Delivered"];
