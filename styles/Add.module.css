@@ -12,10 +12,10 @@
 }
 
 .wrapper {
-  width: 500px;
+  width: 31.25rem;
   background-color: white;
-  padding: 10px 50px;
-  border-radius: 20px;
+  padding: 0.625rem 3.125rem;
+  border-radius: 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -40,12 +40,12 @@
 .item {
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
 }
 
 .label {
-  margin-bottom: 5px;
-  font-size: 14px;
+  margin-bottom: 0.325rem;
+  font-size: 0.875rem;
   font-weight: 500;
 }
 
@@ -70,14 +70,14 @@
 }
 
 .extraItems {
-  margin: 10px 0px;
+  margin: 0.625rem 0;
   display: flex;
   flex-wrap: wrap;
 }
 
 .extraItem {
-  padding: 5px;
-  font-size: 14px;
+  padding: 0.325rem;
+  font-size: 0.875rem;
   border: 1px solid tomato;
   background-color: white;
   color: tomato;

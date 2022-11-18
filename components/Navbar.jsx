@@ -29,7 +29,7 @@ const Navbar = () => {
             <Link href="../#menu">Menu</Link>
           </li>
           <li className={styles.logo}>
-            <Image src="/img/LOGO.png" alt="" width="100px" height="100px" />
+            <Image src="/img/LOGO.png" alt="" width="100" height="100" />
           </li>
 
           <li className={styles.listItem}>About Us</li>
