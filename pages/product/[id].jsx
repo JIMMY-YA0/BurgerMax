@@ -135,7 +135,7 @@ const Product = ({ burger }) => {
                     }}
                   />
                 }
-                label={option.text}
+                label={option.text + "($" + option.price + ")"}
                 onChange={(e) => handlechange(e, option)}
               />
             </div>

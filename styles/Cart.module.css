@@ -29,11 +29,11 @@
 }
 
 .name {
-  font-weight: 500;
+  font-weight: bold;
 }
 
 .total {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .wrapper {
@@ -52,10 +52,15 @@
 }
 
 .title {
-  padding-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   border-bottom: 1px solid white;
 }
-
+.totalText {
+  padding-top: 0.2rem;
+}
 .totalTextTitle:last-child {
   margin-right: 10px;
   font-size: 1rem;
@@ -108,12 +113,6 @@
     display: none;
   }
 
-  .clear {
-    position: absolute;
-    top: 0.5rem;
-    right: 1rem;
-  }
-
   .tr {
     display: flex;
     flex-direction: column;
@@ -125,17 +124,9 @@
   .tr td:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(3)) {
     width: 80%;
     text-align: left;
+    font-size: 1rem;
   }
 
-  .tr td:not(:nth-child(1)) .td::before {
-    position: absolute;
-    /* Top/left values mimic padding */
-    top: 6px;
-    left: 6px;
-    width: 45%;
-    padding-right: 10px;
-    white-space: nowrap;
-  }
   .imgContainer {
     width: 35vw;
     height: 35vw;
@@ -154,20 +145,20 @@
 
   .extras::before {
     content: "Meal Options: ";
-    font-weight: 500;
+    font-weight: bold;
   }
 
   .price::before {
     content: "Price: ";
-    font-weight: 500;
+    font-weight: bold;
   }
   .quantity::before {
     content: "Quantity: ";
-    font-weight: 500;
+    font-weight: bold;
   }
   .total::before {
     content: "Total: ";
-    font-weight: 500;
+    font-weight: bold;
   }
 }
 

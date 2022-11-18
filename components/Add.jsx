@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "../styles/Add.module.css";
 import LoadingButton from "@mui/lab/LoadingButton";
 import axios from "axios";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import { Button } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import { ToastContainer, toast } from "react-toastify";
@@ -16,6 +16,7 @@ const Add = ({ setClose }) => {
   const [extraOptions, setExtraOptions] = useState([]);
   const [extra, setExtra] = useState(null);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
   axios.defaults.baseURL = process.env.PROD_URL;
   const changePrice = (e, index) => {
     const currentPrices = prices;
@@ -62,7 +63,7 @@ const Add = ({ setClose }) => {
         progress: undefined,
         theme: "dark",
       });
-      Router.reload();
+      router.reload();
     } catch (err) {
       toast.error("Failed to Add Item Added to Menu!", {
         position: "bottom-center",

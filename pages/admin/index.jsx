@@ -82,14 +82,7 @@ const Index = ({ orders, products }) => {
               <tbody key={product._id}>
                 <tr>
                   <td>
-                    <Image
-                      src={product.img}
-                      width={50}
-                      height={50}
-                      objectFit="cover"
-                      alt=""
-                      loading="lazy"
-                    />
+                    <Image src={product.img} width={50} height={50} objectFit="cover" alt="" />
                   </td>
                   <td onClick={() => setShowProductId((prevState) => !prevState)}>
                     {showProductId ? product._id : product._id.slice(0, 7) + "..."}

@@ -106,14 +106,6 @@ const Cart = () => {
               <th>Price</th>
               <th>Quantity</th>
               <th>Total</th>
-
-              <IconButton
-                className={styles.clear}
-                aria-label="delete"
-                onClick={() => dispatch(reset())}
-              >
-                <DeleteSweepOutlinedIcon fontSize="small" />
-              </IconButton>
             </tr>
           </tbody>
           <tbody className={styles.tbody}>
@@ -159,7 +151,13 @@ const Cart = () => {
       </div>
       <div className={styles.right}>
         <div className={styles.wrapper}>
-          <h2 className={styles.title}>Cart Summary</h2>
+          <div className={styles.title}>
+            <h2>Cart Summary</h2>
+            <IconButton aria-label="delete" onClick={() => dispatch(reset())}>
+              <DeleteSweepOutlinedIcon fontSize="small" />
+            </IconButton>
+          </div>
+
           <div className={styles.totalText}>
             <b className={styles.totalTextTitle}>Subtotal:</b> $
             {(Math.round(cart.total * 100) / 100).toFixed(2)}

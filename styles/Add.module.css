@@ -81,8 +81,9 @@
   border: 1px solid tomato;
   background-color: white;
   color: tomato;
-  margin-right: 10px;
-  border-radius: 10px;
+  margin-right: 0.625rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.625rem;
   cursor: pointer;
 }
 
