@@ -108,6 +108,11 @@
     display: none;
   }
 
+  .tbody {
+    margin: auto;
+    display: block;
+  }
+
   .tr {
     display: flex;
     flex-direction: column;

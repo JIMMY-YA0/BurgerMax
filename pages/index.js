@@ -5,7 +5,6 @@ import styles from "../styles/Home.module.css";
 import Services from "../components/Services";
 import Testimonial from "../components/Testimonial";
 
-axios.defaults.baseURL = process.env.PROD_URL;
 export default function Home() {
   return (
     <div className={styles.container}>

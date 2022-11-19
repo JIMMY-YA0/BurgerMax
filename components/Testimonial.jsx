@@ -44,7 +44,7 @@ const Testimonial = () => {
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <div className={styles.ClientImg}>
-          <Image src="/img/Client.png" width={470} height={504} />
+          <Image src="/img/client.png" width={470} height={504} alt="" />
         </div>
         <div className={styles.headlineContainer}>
           <div className={styles.headline}>
