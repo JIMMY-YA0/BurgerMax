@@ -1,7 +1,9 @@
 .container {
   width: 100%;
   padding: 2rem 0;
-  background-color: #fcfdecc6;
+  background-color: #fcfdec38;
+  background-image: repeating-radial-gradient(circle at 0 0, transparent 0, #f8ffe953 0.875rem),
+    repeating-linear-gradient(#fcfdec38, #cbf0ad57);
 }
 
 .headline {

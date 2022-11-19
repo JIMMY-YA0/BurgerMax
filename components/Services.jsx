@@ -39,7 +39,6 @@ const Services = () => {
         <div className={styles.imageContainer}>
           {servicesData.map((item) => (
             <div key={item.id} className={styles.wrapper}>
-              {/* <img src={item.img} alt="" className="w-40  object-contain " /> */}
               <Image src={`/img/${item.img}`} alt="" width={160} height={146} />
               <h3 className={styles.title}>{item.title}</h3>
               <p className={styles.describe}>{item.describe}</p>
