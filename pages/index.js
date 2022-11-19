@@ -4,6 +4,7 @@ import Image from "next/image";
 import Featured from "../components/Featured";
 import BurgerList from "../components/BurgerList";
 import styles from "../styles/Home.module.css";
+import Services from "../components/Services";
 
 axios.defaults.baseURL = process.env.PROD_URL;
 
@@ -16,6 +17,7 @@ export default function Home({ burgerList, admin }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Featured />
+      <Services />
       <BurgerList burgerList={burgerList} />
     </div>
   );

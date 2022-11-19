@@ -1,0 +1,91 @@
+.container {
+  width: 100%;
+  padding: 2rem 0;
+  background-color: #fcfdecc6;
+}
+
+.headline {
+  text-align: center;
+  padding: 0 1rem;
+  width: 90%;
+  margin: auto;
+}
+
+.h1 {
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  font-weight: 500;
+  padding: 1rem 0;
+}
+
+.h2,
+.h3 {
+  font-size: 3rem;
+  line-height: 1rem;
+  font-weight: 700;
+}
+
+.h3 span {
+  color: red;
+}
+
+.sologan {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  padding-top: 0.5rem;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 1.25rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  margin-top: 1rem;
+}
+
+.describe {
+  display: block;
+  margin-bottom: 5rem;
+}
+@media screen and (max-width: 768px) {
+  .imageContainer {
+    margin-top: 2rem;
+  }
+  .title {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  .describe {
+    display: none;
+  }
+}
+@media screen and (max-width: 640px) {
+  .h1 {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+  .h2,
+  .h3 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+  .sologan {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
