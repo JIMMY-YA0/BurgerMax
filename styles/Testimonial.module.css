@@ -2,9 +2,9 @@
   width: 100%;
   position: relative;
   padding: 6rem 0;
-  background-color: rgb(253, 240, 220);
-  background-image: repeating-radial-gradient(circle at 0 0, transparent 0, #f8f8d832 0.875rem),
-    repeating-linear-gradient(#b8f3b451, #f5fff000);
+  background-color: blanchedalmond;
+  background-image: repeating-radial-gradient(circle at 0 0, transparent 0, #ecfefc32 0.875rem),
+    repeating-linear-gradient(#ecfefcde, #c7fcc521);
 }
 
 .wrapper {

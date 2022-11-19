@@ -71,7 +71,7 @@ const Product = ({ burger }) => {
   };
   return (
     <div className={styles.container}>
-      <Link href="../#menu" passHref>
+      <Link href="../menu" passHref>
         <ArrowBack className={styles.back} />
       </Link>
       <div className={styles.left}>
