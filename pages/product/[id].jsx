@@ -15,6 +15,7 @@ import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
+axios.defaults.baseURL = process.env.PROD_URL;
 const Product = ({ burger }) => {
   const [price, setPrice] = useState(burger.prices[0]);
   const [size, setSize] = useState(0);
@@ -189,7 +190,18 @@ const Product = ({ burger }) => {
   );
 };
 
-export const getServerSideProps = async ({ params }) => {
+export const getStaticPaths = async () => {
+  const res = await axios.get(`/api/products`);
+  const paths = res.data.map((product) => ({
+    params: { id: product._id },
+  }));
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps = async ({ params }) => {
   const res = await axios.get(`/api/products/${params.id}`);
   return {
     props: {
