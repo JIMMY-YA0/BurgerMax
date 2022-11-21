@@ -11,7 +11,7 @@ const Index = ({ burgerList }) => {
   );
 };
 
-export const getServerSideProps = async (ctx) => {
+export const getStaticProps = async () => {
   const res = await axios.get(`/api/products`);
   return {
     props: {
