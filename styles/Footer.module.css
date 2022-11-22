@@ -1,5 +1,5 @@
 .container {
-  width: 100vw;
+  width: 100%;
   background-image: url(../public/img/backgroud.png);
   background-color: #222;
   display: flex;
