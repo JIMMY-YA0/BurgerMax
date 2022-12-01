@@ -4,7 +4,6 @@ import axios from "axios";
 
 const Order = ({ order }) => {
   const status = order.status;
-  console.log("order:", order);
   const statusClass = (index) => {
     if (index - status < 1) return styles.done;
     if (index - status === 1) return styles.inProgress;
