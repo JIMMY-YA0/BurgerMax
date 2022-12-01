@@ -9,6 +9,7 @@ import {
   PayPalButtons,
   usePayPalScriptReducer,
 } from "@paypal/react-paypal-js";
+
 import axios from "axios";
 import { reset } from "../redux/cartSlice";
 import { useRouter } from "next/router";
@@ -20,7 +21,7 @@ const Cart = () => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [cash, setCash] = useState(false);
-  const amount = cart.total;
+  const amount = (Math.round(cart.total * 100) / 100).toFixed(2);
   const currency = "AUD";
   const style = { layout: "vertical", size: "responsive", label: "checkout" };
   const createOrder = async (data) => {
@@ -66,7 +67,7 @@ const Cart = () => {
                   {
                     amount: {
                       currency_code: currency,
-                      value: number_format(amount, 2, ".", ""),
+                      value: amount,
                     },
                   },
                 ],
