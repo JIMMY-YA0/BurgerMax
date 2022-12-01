@@ -2,6 +2,7 @@ import styles from "../../styles/Order.module.css";
 import Image from "next/image";
 import axios from "axios";
 
+axios.defaults.baseURL = process.env.PROD_URL;
 const Order = ({ order }) => {
   const status = order.status;
   const statusClass = (index) => {
@@ -9,8 +10,6 @@ const Order = ({ order }) => {
     if (index - status === 1) return styles.inProgress;
     if (index - status > 1) return styles.undone;
   };
-
-  console.log(order.orderDetails);
 
   return (
     <div className={styles.container}>
