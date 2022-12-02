@@ -17,6 +17,7 @@ const Testimonial = () => {
     slidesToScroll: 1,
     arrows: false,
   };
+
   const reviewData = [
     {
       id: 0,
